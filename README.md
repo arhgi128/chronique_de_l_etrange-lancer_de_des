@@ -25,6 +25,6 @@ Il m'a été inspiré par l'adaptation de Teal Dice faite sur le site non offici
 
 ## License
 
-Ce projet est sous licence MIT pour maa partie.
+Ce projet est sous licence MIT pour ma partie.
 Le projet teal dice semble libre de droit.
 Three.js et Cannon.js sont sous licence MIT.
