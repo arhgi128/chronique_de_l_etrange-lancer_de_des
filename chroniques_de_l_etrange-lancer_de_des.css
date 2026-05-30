@@ -1,0 +1,191 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Cinzel+Decorative:wght@400;700&family=IM+Fell+English:ital@0;1&display=swap');
+:root {
+  --bg-deep:#0a0a0f;--bg-panel:#10101a;--bg-card:#161622;
+  --border:#2a2a40;--border-glow:#4a3a6a;
+  --text-primary:#e8dfc8;--text-dim:#8a7a6a;--gold:#c8a84a;--gold-dim:#7a6028;
+  --d0:#8B6914;--d1:#6ab4e8;--d2:#c82020;--d3:#b0b0c0;--d4:#7a5030;
+  --d5:#5a3a10;--d6:#1a3a7a;--d7:#e8c830;--d8:#3a3a50;--d9:#2a7a30;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg-deep);color:var(--text-primary);font-family:'IM Fell English',Georgia,serif;min-height:100vh;overflow-x:hidden;}
+.screen{display:none;min-height:100vh;}
+.screen.active{display:flex;flex-direction:column;}
+
+/* ═══════════════════════════════════════
+   SECTION : Écran de configuration (setup)
+   ═══════════════════════════════════════ */
+/* SETUP */
+#screen-setup{align-items:center;justify-content:center;background:radial-gradient(ellipse at center,#1a1028 0%,#0a0a0f 70%);padding:2rem;}
+.setup-container{width:100%;max-width:680px;}
+.setup-title{text-align:center;margin-bottom:2rem;}
+.setup-title h1{font-family:'Cinzel Decorative',serif;font-size:clamp(1.4rem,4vw,2.2rem);color:var(--gold);text-shadow:0 0 30px rgba(200,168,74,.4);letter-spacing:.05em;line-height:1.3;}
+.setup-title .subtitle{font-family:'Noto Serif SC',serif;color:var(--text-dim);font-size:.9rem;margin-top:.5rem;letter-spacing:.2em;}
+.setup-ornament{text-align:center;color:var(--gold-dim);font-size:1.4rem;margin:1rem 0;letter-spacing:.5em;}
+.panel{background:var(--bg-panel);border:1px solid var(--border);border-radius:8px;padding:1.5rem;margin-bottom:1.2rem;}
+.panel-title{font-family:'Cinzel Decorative',serif;font-size:.85rem;color:var(--gold);letter-spacing:.15em;text-transform:uppercase;margin-bottom:1rem;display:flex;align-items:center;gap:.5rem;}
+.panel-title::after{content:'';flex:1;height:1px;background:linear-gradient(to right,var(--gold-dim),transparent);}
+.form-group{margin-bottom:.8rem;}
+.form-group label{display:block;font-size:.8rem;color:var(--text-dim);margin-bottom:.3rem;letter-spacing:.05em;text-transform:uppercase;}
+input[type=text],input[type=number],select{width:100%;background:var(--bg-deep);border:1px solid var(--border);border-radius:4px;color:var(--text-primary);padding:.55rem .8rem;font-family:'IM Fell English',serif;font-size:1rem;transition:border-color .2s;}
+input[type=text]:focus,input[type=number]:focus,select:focus{outline:none;border-color:var(--gold-dim);}
+select option{background:var(--bg-deep);}
+.add-player-form{display:grid;grid-template-columns:1fr 1fr auto auto;gap:.6rem;align-items:end;}
+.btn{padding:.55rem 1.2rem;border:1px solid var(--border);border-radius:4px;cursor:pointer;font-family:'IM Fell English',serif;font-size:.9rem;transition:all .2s;white-space:nowrap;}
+.btn-primary{background:linear-gradient(135deg,#3a2a10,#5a4020);border-color:var(--gold-dim);color:var(--gold);}
+.btn-primary:hover{background:linear-gradient(135deg,#5a4020,#7a6030);border-color:var(--gold);}
+.btn-danger{background:rgba(180,30,30,.2);border-color:#5a2020;color:#c06060;padding:.3rem .7rem;font-size:.8rem;}
+.btn-danger:hover{background:rgba(180,30,30,.4);}
+.btn-ghost{background:transparent;border-color:var(--border);color:var(--text-dim);}
+.btn-ghost:hover{border-color:var(--border-glow);color:var(--text-primary);}
+.btn-large{width:100%;padding:.9rem;font-size:1.1rem;letter-spacing:.1em;text-align:center;}
+.btn:disabled{opacity:.4;cursor:not-allowed;}
+.players-list{display:flex;flex-direction:column;gap:.5rem;margin-top:.8rem;}
+.player-item{display:flex;align-items:center;justify-content:space-between;padding:.5rem .8rem;background:var(--bg-card);border-radius:4px;border-left:3px solid var(--border);}
+
+/* ═══════════════════════════════════════
+   SECTION : Écran de jeu principal
+   ═══════════════════════════════════════ */
+/* GAME SCREEN */
+#screen-game{flex-direction:row;height:100vh;overflow:hidden;}
+.sidebar-left{width:220px;min-width:180px;background:var(--bg-panel);border-right:1px solid var(--border);display:flex;flex-direction:column;overflow-y:auto;flex-shrink:0;z-index:10;}
+.sidebar-section{padding:.8rem;border-bottom:1px solid var(--border);}
+.sidebar-section-title{font-family:'Cinzel Decorative',serif;font-size:.8rem;color:var(--gold);letter-spacing:.2em;text-transform:uppercase;margin-bottom:.6rem;}
+.tinjin-display{text-align:center;}
+.tinjin-value{font-family:'Cinzel Decorative',serif;font-size:2.2rem;color:var(--gold);line-height:1;}
+.tinjin-label{font-size:.85rem;color:var(--text-dim);letter-spacing:.15em;text-transform:uppercase;}
+.tinjin-controls{display:flex;gap:.4rem;margin-top:.6rem;}
+.tinjin-btn{flex:1;padding:.3rem;background:rgba(200,168,74,.1);border:1px solid var(--gold-dim);color:var(--gold);border-radius:4px;cursor:pointer;font-size:1rem;transition:background .2s;}
+.tinjin-btn:hover{background:rgba(200,168,74,.25);}
+.loksyu-grid{display:flex;flex-wrap:wrap;gap:4px;}
+.loksyu-die{width:32px;height:32px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:.9rem;font-weight:bold;color:white;text-shadow:0 1px 2px rgba(0,0,0,.8);border:1px solid rgba(255,255,255,.15);flex-shrink:0;transition:transform .15s;}
+.loksyu-die.selectable{cursor:pointer;}
+.loksyu-die.selectable:hover{transform:scale(1.25);box-shadow:0 0 8px rgba(255,255,255,.3);}
+.loksyu-die.selected-die{outline:2px solid white;transform:scale(1.15);}
+.player-card{background:var(--bg-card);border-radius:4px;padding:.5rem .6rem;margin-bottom:.4rem;border-left:2px solid var(--border);cursor:pointer;transition:all .2s;}
+.player-card:hover{border-left-color:var(--gold-dim);}
+.player-card.active{border-left-color:var(--gold);background:rgba(200,168,74,.08);}
+.player-card-name{font-size:1rem;font-weight:600;margin-bottom:.2rem;}
+.player-card-element{font-size:.78rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:.1em;}
+.player-card-stocks{display:flex;gap:.5rem;margin-top:.3rem;}
+.stock-badge{font-size:.82rem;padding:1px 6px;border-radius:10px;font-weight:bold;}
+.stock-faste{background:rgba(74,160,68,.3);color:#6ada60;border:1px solid rgba(74,160,68,.4);}
+.stock-nefaste{background:rgba(200,32,32,.3);color:#e07060;border:1px solid rgba(200,32,32,.4);}
+.main-area{flex:1;display:flex;flex-direction:column;overflow:hidden;position:relative;}
+.status-bar{background:var(--bg-panel);border-bottom:1px solid var(--border);padding:.6rem 1rem;display:flex;align-items:center;gap:1rem;flex-shrink:0;z-index:10;}
+.status-phase{font-family:'Cinzel Decorative',serif;font-size:.75rem;color:var(--gold);letter-spacing:.1em;}
+.status-info{font-size:1rem;color:var(--text-dim);flex:1;}
+
+/* ─── Zone centrale : roue SVG + canvas dés 3D ─── */
+.center-content{flex:1;position:relative;overflow:hidden;cursor:crosshair;}
+
+/* ─── Roue Ng Hang (SVG fixe) ─── */
+.wheel-wrapper{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;z-index:2;padding-bottom:8rem;}
+#ng-hang-svg{width:min(520px,80vw,72vh);height:min(520px,80vw,72vh);pointer-events:all;cursor:pointer;}
+.element-node{cursor:pointer;}
+.wheel-locked .element-node{pointer-events:none;cursor:default;}
+.element-node .elem-circle{transition:filter .2s;}
+.element-node:hover .elem-circle{filter:brightness(1.4);}
+.element-node.selected .elem-circle{filter:brightness(1.6) drop-shadow(0 0 8px currentColor);}
+
+/* ─── Canvas Three.js (dés 3D) ─── */
+#dice-fullscreen{position:absolute;inset:0;z-index:1;pointer-events:none;}
+/* throwable supprimé — bind_mouse sur center-content */
+#dice-fullscreen.rolling{z-index:50;}
+#dice-container{width:100%;height:100%;position:relative;background:transparent!important;}
+#dice-container canvas{position:absolute;inset:0;width:100%!important;height:100%!important;background:transparent!important;}
+
+/* ─── Overlay UI (instruction, slider, boutons lancer) ─── */
+.dice-ui-overlay{position:absolute;bottom:1rem;left:0;right:0;z-index:20;display:flex;flex-direction:column;align-items:center;gap:.5rem;pointer-events:none;}
+.dice-ui-overlay > *{pointer-events:all;}
+.elem-instruction{font-family:'Cinzel Decorative',serif;font-size:1rem;color:var(--gold);text-shadow:0 0 20px rgba(200,168,74,.8),0 2px 4px rgba(0,0,0,.9);letter-spacing:.1em;text-align:center;background:rgba(10,10,15,.8);padding:.4rem 1.2rem;border-radius:20px;border:1px solid var(--gold-dim);}
+.elem-selected-badge{display:none;background:rgba(10,10,15,.9);border:1px solid var(--gold);border-radius:20px;padding:.35rem 1.4rem;font-family:'Cinzel Decorative',serif;font-size:.85rem;color:var(--gold);text-align:center;}
+.elem-selected-badge.visible{display:block;}
+.dice-count-row{display:flex;align-items:center;gap:.8rem;background:rgba(10,10,15,.85);border:1px solid var(--border-glow);border-radius:8px;padding:.5rem 1rem;}
+.dice-count-row label{font-size:.8rem;color:var(--text-dim);white-space:nowrap;}
+input[type=range]{-webkit-appearance:none;width:140px;height:4px;border-radius:2px;background:var(--border-glow);outline:none;}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;border-radius:50%;background:var(--gold);cursor:pointer;box-shadow:0 0 6px rgba(200,168,74,.6);}
+.dice-count-val{font-family:'Cinzel Decorative',serif;font-size:1.1rem;color:var(--gold);min-width:28px;text-align:center;}
+.throw-controls{display:flex;gap:.6rem;align-items:center;}
+.btn-throw{background:linear-gradient(135deg,rgba(200,168,74,.35),rgba(200,168,74,.15));border:2px solid var(--gold);color:var(--gold);font-family:'Cinzel Decorative',serif;font-size:.9rem;padding:.65rem 2.2rem;border-radius:6px;cursor:pointer;text-shadow:0 0 10px rgba(200,168,74,.8);box-shadow:0 0 20px rgba(200,168,74,.2);transition:all .2s;}
+.btn-throw:hover{background:linear-gradient(135deg,rgba(200,168,74,.55),rgba(200,168,74,.3));box-shadow:0 0 30px rgba(200,168,74,.4);}
+.btn-cancel-test{background:rgba(180,30,30,.2);border:1px solid #5a2020;color:#c06060;font-family:'Cinzel Decorative',serif;font-size:.8rem;padding:.6rem 1.4rem;border-radius:6px;cursor:pointer;display:inline-block}
+.btn-cancel-test:hover{background:rgba(180,30,30,.4);}
+.drag-hint{font-size:.7rem;color:rgba(200,168,74,.45);text-align:center;display:none;}
+
+/* ─── Chips dés résultats positionnés sur la roue ─── */
+#wheel-chips-host{position:absolute;inset:0;z-index:3;pointer-events:none;display:flex;align-items:center;justify-content:center;}
+#wheel-chips-inner{position:relative;width:min(520px,80vw,72vh);height:min(520px,80vw,72vh);}
+.wheel-die-chip{position:absolute;width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-weight:bold;color:white;text-shadow:0 1px 1px rgba(0,0,0,.8);border:1px solid rgba(0,0,0,.75);transform:translate(-50%,-50%) rotate(45deg);box-shadow:0 2px 6px rgba(0,0,0,.5);}
+.wheel-die-chip span{display:block;transform:rotate(-45deg);line-height:1;}
+
+/* ─── Panneau résultats flottant (après lancer) ─── */
+.results-float{position:absolute;top:1rem;right:1rem;z-index:25;background:rgba(10,10,20,.93);border:1px solid var(--border-glow);border-radius:8px;padding:.8rem;min-width:230px;display:none;backdrop-filter:blur(4px);}
+.results-float.visible{display:block;}
+.results-float-title{font-family:'Cinzel Decorative',serif;font-size:.72rem;color:var(--gold);margin-bottom:.5rem;padding-bottom:.3rem;border-bottom:1px solid var(--border);}
+.result-row{display:flex;align-items:center;gap:.5rem;padding:.25rem 0;border-bottom:1px solid rgba(42,42,64,.5);}
+.result-row:last-child{border-bottom:none;}
+.result-label{font-size:.85rem;color:var(--text-dim);width:100px;flex-shrink:0;text-transform:uppercase;letter-spacing:.04em;}
+.result-chips{display:flex;gap:3px;flex-wrap:wrap;flex:1;}
+.result-count{font-family:'Cinzel Decorative',serif;font-size:1.1rem;color:var(--gold);min-width:18px;text-align:right;}
+
+/* ─── Panneau actions post-test ─── */
+.post-test-float{position:absolute;bottom:7rem;left:1rem;z-index:25;background:rgba(10,10,20,.93);border:1px solid var(--border-glow);border-radius:8px;padding:.8rem;max-width:290px;display:none;backdrop-filter:blur(4px);max-height:60vh;overflow-y:auto;}
+.post-test-float.visible{display:block;}
+.post-title{font-family:'Cinzel Decorative',serif;font-size:.68rem;color:var(--gold);margin-bottom:.4rem;margin-top:.5rem;}
+.post-title:first-child{margin-top:0;}
+.post-btn{display:block;width:100%;text-align:left;padding:.45rem .7rem;background:var(--bg-card);border:1px solid var(--border);border-radius:4px;color:var(--text-primary);cursor:pointer;font-family:'IM Fell English',serif;font-size:.92rem;margin-bottom:.3rem;transition:all .2s;}
+.post-btn:hover{border-color:var(--gold-dim);color:var(--gold);}
+.post-btn-end{background:linear-gradient(135deg,rgba(200,168,74,.2),rgba(200,168,74,.1));border-color:var(--gold-dim);color:var(--gold);font-weight:bold;margin-top:.4rem;}
+.post-btn-disabled{opacity:.38;cursor:not-allowed;pointer-events:none;}
+
+/* ─── Guide lancer (rituel, init) ─── */
+.guide-panel{position:absolute;top:0;left:0;right:0;background:linear-gradient(to top,rgba(20,15,35,.98),rgba(20,15,35,.85));border-bottom:2px solid var(--gold);padding:1rem 1.5rem;z-index:40;display:none;align-items:center;gap:1rem;font-size:1.1rem;}
+.guide-panel.visible{display:flex;}
+.guide-text{flex:1;font-size:1rem;}
+.guide-player-name{color:var(--gold);font-weight:bold;}
+
+/* ─── Sidebar droite (actions rapides) ─── */
+.sidebar-right{width:200px;min-width:160px;background:var(--bg-panel);border-left:1px solid var(--border);display:flex;flex-direction:column;overflow-y:auto;flex-shrink:0;padding:.8rem;z-index:10;}
+.sidebar-section-title2{font-family:'Cinzel Decorative',serif;font-size:.65rem;color:var(--gold);letter-spacing:.2em;text-transform:uppercase;margin-bottom:.6rem;}
+.selected-player-card{background:var(--bg-card);border:1px solid var(--gold-dim);border-radius:6px;padding:.8rem;margin-bottom:.8rem;}
+.selected-player-title{font-size:.65rem;color:var(--gold);text-transform:uppercase;letter-spacing:.15em;margin-bottom:.4rem;}
+.selected-player-name{font-size:1.1rem;font-weight:bold;margin-bottom:.2rem;}
+.selected-player-elem{font-size:.75rem;color:var(--text-dim);}
+.stock-control{display:flex;align-items:center;gap:.4rem;margin-top:.6rem;padding:.4rem;background:var(--bg-deep);border-radius:4px;}
+.stock-control-label{flex:1;font-size:.75rem;color:var(--text-dim);}
+.stock-control-val{font-family:'Cinzel Decorative',serif;font-size:1rem;}
+.stock-btn{width:22px;height:22px;border-radius:3px;border:1px solid var(--border);background:transparent;color:var(--text-dim);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.9rem;transition:all .15s;}
+.stock-btn:hover{border-color:var(--gold-dim);color:var(--gold);}
+.quick-action{width:100%;text-align:left;padding:.5rem .7rem;background:var(--bg-card);border:1px solid var(--border);border-radius:4px;color:var(--text-primary);cursor:pointer;font-family:'IM Fell English',serif;font-size:.95rem;margin-bottom:.35rem;transition:all .2s;}
+.quick-action:hover{border-color:var(--gold-dim);color:var(--gold);}
+.quick-action.danger{border-color:#4a2020;color:#c06060;}
+.quick-action.danger:hover{border-color:#8a2020;background:rgba(180,30,30,.15);}
+
+/* ─── Modals ─── */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:100;align-items:center;justify-content:center;padding:1rem;}
+.modal-overlay.open{display:flex;}
+.modal{background:var(--bg-panel);border:1px solid var(--border-glow);border-radius:8px;padding:1.5rem;max-width:480px;width:100%;max-height:90vh;overflow-y:auto;}
+.modal-title{font-family:'Cinzel Decorative',serif;font-size:1rem;color:var(--gold);margin-bottom:1rem;padding-bottom:.6rem;border-bottom:1px solid var(--border);}
+.modal-body{margin-bottom:1rem;}
+.modal-actions{display:flex;gap:.6rem;justify-content:flex-end;}
+
+/* ─── Toast notifications ─── */
+.toast{position:fixed;top:1.5rem;left:50%;transform:translateX(-50%) translateY(-20px);background:rgba(10,10,20,.97);border:2px solid var(--gold);border-radius:8px;padding:.9rem 2rem;font-size:1.1rem;z-index:300;opacity:0;transition:all .35s;max-width:500px;min-width:250px;text-align:center;box-shadow:0 4px 30px rgba(200,168,74,.3);}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+/* ─── Couleurs dés (0-9 → élément + yin/yang) ─── */
+.die-0{background-color:var(--d0);}.die-1{background-color:var(--d1);}.die-2{background-color:var(--d2);}
+.die-3{background-color:var(--d3);color:#333;}.die-4{background-color:var(--d4);}.die-5{background-color:var(--d5);}
+.die-6{background-color:var(--d6);}.die-7{background-color:var(--d7);color:#333;}.die-8{background-color:var(--d8);}
+.die-9{background-color:var(--d9);}
+
+/* ─── Indicateurs flash-back ─── */
+.fb-check{display:inline-block;width:18px;height:18px;border-radius:50%;font-size:.75rem;line-height:18px;text-align:center;font-weight:bold;margin-right:4px;}
+.fb-ok{background:rgba(74,170,68,.3);color:#6ada60;border:1px solid #6ada60;}
+.fb-ko{background:rgba(200,32,32,.3);color:#e07060;border:1px solid #e07060;}
+
+/* ─── Gain énergie Hei ─── */
+.hei-section{margin-bottom:.8rem;}
+.hei-section-title{font-size:.75rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.4rem;}
+.hei-grid{display:flex;flex-wrap:wrap;gap:5px;min-height:20px;}
+</style>
